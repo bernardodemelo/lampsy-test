@@ -6,4 +6,5 @@ export const spacing:Record<string, number>= {
 	lg: 24,
 	xl: 64,
 	xxl: 72,
+	xxxl: 84
 };

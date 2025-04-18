@@ -1,77 +1,63 @@
-import { useRef, useCallback } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
 import VideoPlayer, { type VideoPlayerRef } from "react-native-video-player";
-import { typography, spacing } from "../theme";
+import { ActivityIndicator, Text, View } from "react-native";
+import type { OnVideoErrorData } from "react-native-video";
+import { useCallback, useRef } from "react";
+
+import Heading from "../components/atoms/Heading";
+import config from "../config/default.json";
 import appContent from "../locales/en.json";
+import { spacing } from "../theme";
 
-const VideoScreen = () => {
-  const playerRef = useRef<VideoPlayerRef>(null);
-  const progress = useRef(0);
+export default function VideoScreen() {
+	const playerRef = useRef<VideoPlayerRef>(null);
+	const progress = useRef(0);
 
-  const handleProgress = useCallback(({ currentTime }: { currentTime: number }) => {
-    progress.current = currentTime;
-  }, []);
+	const handleProgress = useCallback(
+		({ currentTime }: { currentTime: number }) => {
+			progress.current = currentTime;
+		},
+		[],
+	);
 
-  const handleError = useCallback((error: unknown) => {
-    console.error("Video error:", error);
-  }, []);
+	const handleError = useCallback((error: OnVideoErrorData) => {
+		// TODO: should have an errorBoundary that caughts the errors and displays a modal, if it affects the UX
+		console.error("Video error:", error);
+	}, []);
 
-  return (
-    <View
-      style={{
-        marginVertical: spacing.xxl,
-        paddingHorizontal: spacing.md,
-        flex: 1,
-      }}
-    >
-      {/* Heading */}
-      <View style={{ marginBottom: spacing.xl }}>
-        <Text
-          style={{
-            fontSize: typography.fontSizes.extraLarge,
-            marginBottom: spacing.md,
-          }}
-        >
-          {appContent.heading_video}
-        </Text>
-        <Text
-          style={{
-            fontSize: typography.fontSizes.medium,
-            fontWeight: typography.fontWeights.light,
-          }}
-        >
-          {appContent.paragraph_video}
-        </Text>
-      </View>
+	return (
+		<View>
+			{/* Heading */}
+			<View style={{ marginBottom: spacing.xl }}>
+				<Heading>{appContent.heading_video}</Heading>
+				<Text>{appContent.paragraph_video}</Text>
+			</View>
 
-      {/* Video Player */}
-      <VideoPlayer
-        endWithThumbnail
-        thumbnail={{
-          uri: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-        }}
-        source={{
-          uri: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-        }}
-        renderLoader={() => (
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: "black",
-              justifyContent: "center",
-            }}
-          >
-            <ActivityIndicator size="large" />
-          </View>
-        )}
-        controlsTimeout={2000}
-        onProgress={handleProgress}
-        onError={handleError}
-        showDuration
-        ref={playerRef}
-      />
-    </View>
-  );
+			{/* Video Player */}
+			<VideoPlayer
+				endWithThumbnail
+				thumbnail={{
+					uri: config.video_thumbnail_uri
+				}}
+				source={{
+					uri: config.video_uri
+				}}
+				renderLoader={() => (
+					<View
+						style={{
+							flex: 1,
+							backgroundColor: "black",
+							justifyContent: "center",
+						}}
+					>
+						<ActivityIndicator size="large" />
+					</View>
+				)}
+				controlsTimeout={2000}
+				onProgress={handleProgress}
+				onError={handleError}
+				showDuration
+				ref={playerRef}
+			/>
+		</View>
+	);
 };
-
-export default VideoScreen;

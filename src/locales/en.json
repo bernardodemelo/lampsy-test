@@ -1,7 +1,15 @@
 {
-    "heading_home": "Hello, Test User",
-    "paragraph_home": "We missed you 👋",
-    "heading_section_home": "Statistic Section", 
-    "heading_video": "Live Monitoring", 
-    "paragraph_video": "Stay connected with real-time updates during diagnostic sessions."
+	"heading_home": "Hello, Test User",
+	"paragraph_home": "We missed you 👋",
+	"heading_section_home": "Statistic Section",
+	"heading_video": "Live Monitoring",
+	"paragraph_video": "Stay connected with real-time updates during diagnostic sessions.",
+	"button_cancel": "Cancel",
+	"button_reset": "Reset",
+	"notifications_settings": "Notifications",
+	"location_settings": "Location Services",
+	"auto_update_settings": "Auto Update",
+	"data_sync_settings": "Data Sync",
+	"reset_settings_heading": "Reset All Settings",
+	"reset_settings_paragraph": "Are you sure you want to reset all settings to default values? This action cannot be undone."
 }
