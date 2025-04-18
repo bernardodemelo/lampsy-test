@@ -1,0 +1,1 @@
+export type MonitoringData = {value:number, label: string, frontColor:string}[]
