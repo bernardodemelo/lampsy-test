@@ -9,19 +9,18 @@ import appContent from "../locales/en.json";
 import { spacing } from "../theme";
 
 export default function HomeScreen() {
-	/* Memoize random data generation function */
 	const chartData = useMemo(() => {
 		const generator = new GenericData();
 		return generator.getRandomData(5);
 	}, []);
 
 	return (
-		<View>
-			<View style={{ marginBottom: spacing.xl }}>
+		<View testID="home-screen">
+			<View testID="home-header" style={{ marginBottom: spacing.xl }}>
 				<Heading>{appContent.heading_home}</Heading>
 				<SubHeading>{appContent.paragraph_home}</SubHeading>
 			</View>
-			<View>
+			<View testID="home-chart">
 				<SubHeading>{appContent.heading_section_home}</SubHeading>
 				<BarChart
 					showYAxisIndices
@@ -34,3 +33,4 @@ export default function HomeScreen() {
 		</View>
 	);
 }
+
