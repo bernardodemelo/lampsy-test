@@ -1,97 +1,85 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Lampsy Test App
 
-# Getting Started
+A React Native application for presenting live video streams with a scalable, production-ready architecture.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## 🚀 Quick Start
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+### 1. Clone and Install Dependencies
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+`git clone <this-repo-url>
+cd lampsy-test
+yarn install`
 
-```sh
-# Using npm
-npm start
+### 2. iOS Setup
+`cd ios
+pod install
+cd ..
+yarn run start
+yarn run ios`
 
-# OR using Yarn
-yarn start
-```
+### 3. Android Setup
 
-## Step 2: Build and run your app
+**Important:**  
+You must create your own `android/local.properties` file with the path to your Android SDK.  
+Example content for `local.properties`:
+`sdk.dir=/Users/<your-username>/Library/Android/sdk`
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+Then run:
+`yarn run start
+yarn run android`
 
-### Android
+--
+## 🧑‍💻 What I'd Do With More Time
 
-```sh
-# Using npm
-npm run android
+### 🏗️ Scalable Live Streaming Architecture
 
-# OR using Yarn
-yarn android
-```
+- **Frontend:**  
+  The React Native app would consume HLS live streams and display them using a robust video player.
 
-### iOS
+- **Backend:**
+  - **Ingest:** Accept live video sources (RTMP/WebRTC) and transcode them to HLS using AWS MediaLive or FFmpeg.
+  - **Storage:** Store HLS segments and manifests in AWS S3 for durability and scalability.
+  - **Delivery:** Use AWS CloudFront as a CDN to serve video content globally with low latency -> optional if should be only available in Portugal. 
+  - **Security:** Restrict access to video content using signed URLs and proper IAM policies.
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+### 🌍 Internationalization (i18n)
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+- Integrate an i18n solution (like `react-i18next`) to support multiple languages.
+- Externalize all user-facing strings and provide translation files for each supported language.
+- Add a language switcher and automatic locale detection.
 
-```sh
-bundle install
-```
+### 📊 Observability and Monitoring
 
-Then, and every time you update your native dependencies, run:
+- Integrate application-level metrics and logs, exporting them to **Prometheus**.
+- Set up **Grafana** dashboards for:
+  - Real-time monitoring of stream health, errors, and user engagement.
+  - Alerting on key metrics (e.g., stream downtime, high error rates).
+- Monitor AWS services and CDN performance.
 
-```sh
-bundle exec pod install
-```
+### 🧪 Enhanced Integration Testing
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+- Implement end-to-end and integration tests using **Detox** for both iOS and Android.
+- Automate test runs in CI/CD pipelines.
+- Cover critical flows: stream playback, error handling, language switching, and navigation.
 
-```sh
-# Using npm
-npm run ios
+### 📦 Deployment to App Stores
 
-# OR using Yarn
-yarn ios
-```
+- Prepare production builds for iOS and Android.
+- Follow [React Native's official guide for App Store deployment][1]:
+  - Configure release schemes and build for production.
+  - Archive and submit to Apple App Store using Xcode.
+  - Prepare and upload to Google Play Store using Android Studio.
+- Automate deployment steps where possible.
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+---
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## 📚 References
 
-## Step 3: Modify your app
+- [React Native: Publishing to App Store][1]
+- [Grafana Documentation](https://grafana.com/docs/)
+- [Prometheus Documentation](https://prometheus.io/docs/)
+- [Detox Testing](https://wix.github.io/Detox/docs/introduction/getting-started/)
 
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+[1]: https://reactnative.dev/docs/publishing-to-app-store
